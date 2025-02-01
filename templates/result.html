@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .result-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .result-container h1 {
+            color: #2575fc;
+            margin-bottom: 20px;
+        }
+
+        .result-container p {
+            color: #333;
+            font-size: 1.2rem;
+        }
+
+        .leaderboard {
+            margin-top: 30px;
+        }
+
+        .leaderboard table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(8, 8, 8, 0.9);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .leaderboard th, .leaderboard td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #070707;
+        }
+
+        .leaderboard th {
+            background-color: #6a11cb;
+            color: white;
+        }
+
+        .leaderboard tr:hover {
+            background-color: #111010;
+        }
+
+        .btn-primary {
+            background-color: #2575fc;
+            border: none;
+            margin-top: 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #1a5bbf;
+        }
+    </style>
+</head>
+<body>
+    <div class="result-container">
+        <h1 class="display-4 mb-4">Quiz Result</h1>
+        <p class="lead">Your score is: <span class="fw-bold">{{ score }} / {{ total_questions }}</span></p>
+        <a href="{{ url_for('index') }}" class="btn btn-primary">Take Another Quiz</a>
+
+        <!-- Leaderboard Section -->
+        <div class="leaderboard mt-4">
+            <h3 style="color: #050505;">Leaderboard</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Language</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody style="color: #fef5f5;">
+                    {% for entry in leaderboard %}
+                        <tr>
+                            <td>{{ entry.language }}</td>
+                            <td>{{ entry.score }} / {{ entry.total_questions }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
